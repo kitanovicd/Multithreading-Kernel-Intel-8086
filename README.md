@@ -47,18 +47,20 @@ The provided text describes switching and thread synchronization mechanisms in a
    - Synchronization primitive operation: Implemented context switching when operations on synchronization primitives (e.g., semaphores or events) occur.
    - Time-sliced context switch: Performed context switches when the time slice allocated to a thread expires.
 
-## Scheduler:
+## Classes
+
+&nbsp; **Scheduler**:
    - The scheduling algorithm and ready queue management are provided externally. The `Scheduler` class, declared in `scheduler.h`, includes static methods `put()` and `get()` for managing the ready queue.
 
-## Semaphore:
+&nbsp; **Semaphore**:
    - Implemented a standard counting semaphore with the operations `wait()` and `signal()`. The `Semaphore` class, defined in `semaphor.h`, should support a time-limited waiting interval.
 
-## Event:
+&nbsp; **Event**:
    - Implemented the concept of an event, which represents a binary semaphore that can block a thread and is triggered by interrupts.
 
-## Event class:
+&nbsp; **Event class**:
    - Implemented the `Event` class, defined in `event.h`, which encapsulates the event concept. It includes methods such as `wait()` and `signal()`, as well as a friend relationship with the `KernelEv` class.
 
-## KernelEv:
+&nbsp; **KernelEv**:
    - Implemented the `KernelEv` class as the kernel-level implementation of events.
 
