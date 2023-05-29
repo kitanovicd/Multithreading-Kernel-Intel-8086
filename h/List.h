@@ -4,30 +4,34 @@
 #include "Thread.h"
 #include "Def.h"
 #include <stdio.h>
+
 class PCB;
 
-class El{
+class El
+{
 public:
-    PCB* pcb;
-    El* next;
-    El(PCB* t){
-    	pcb=t;
-    	next=0;
-    }
+	PCB *pcb;
+	El *next;
+
+	El(PCB *t)
+	{
+		pcb = t;
+		next = 0;
+	}
 };
 
-class List {
+class List
+{
 public:
+	El *first;
+	El *last;
+
 	List();
 	virtual ~List();
 
-	void add(PCB* t);
-	PCB* find(ID id);
+	void add(PCB *t);
 	void remove(ID id);
-public:
-	El* first;
-	El* last;
+	PCB *find(ID id);
 };
-
 
 #endif

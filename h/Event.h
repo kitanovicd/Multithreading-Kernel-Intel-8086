@@ -5,19 +5,19 @@ typedef unsigned char IVTNo;
 
 class KEvent;
 
-class Event {
+class Event
+{
 public:
-
-	Event (IVTNo ivtNo);
-   ~Event ();
-   void wait ();
+   Event(IVTNo ivtNo);
+   ~Event();
+   void wait();
 
 protected:
-
    friend class KEvent;
    void signal();
 
 private:
-   KEvent* myImpl;
+   KEvent *myImpl;
 };
+
 #endif
