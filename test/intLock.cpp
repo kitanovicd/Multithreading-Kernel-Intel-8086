@@ -1,15 +1,18 @@
 #include "intLock.h"
 #include "Timer.h"
+
 int mutex_glb = 1;
 
-void mutex_glb_wait(){
- sloop:asm{
+void mutex_glb_wait()
+{
+sloop:
+	asm {
 	mov ax, 0
-	xchg ax, mutex_glb 	
+	xchg ax, mutex_glb
+	}
+	if (_AX == 0)
+	{
+		dispatch();
+		asm jmp sloop;
+	}
 }
- if(_AX ==0){
-	dispatch();
-	asm jmp sloop;
- }
-}
-

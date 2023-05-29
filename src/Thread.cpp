@@ -1,7 +1,7 @@
 #include "Thread.h"
 #include "stdio.h"
 #include "PCB.h"
-#include "SCHEDULE.H"
+#include "SCHEDULER.H"
 #include "Timer.h"
 #include "Def.h"
 #include "List.h"

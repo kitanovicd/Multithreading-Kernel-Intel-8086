@@ -1,9 +1,3 @@
-//===========================================================================//
-//   Project: Projekat iz Operativnih sistema 1
-//   File:    keyevent.h
-//   Date:    Jun 2019
-//===========================================================================//
-
 #ifndef _OS1_KEYBOARD_EVENT_
 #define _OS1_KEYBOARD_EVENT_
 
@@ -11,27 +5,20 @@
 
 class BoundedBuffer;
 
-
-
-class KeyboardEvent :public Thread{
+class KeyboardEvent : public Thread
+{
 public:
+	KeyboardEvent(BoundedBuffer *);
+	virtual ~KeyboardEvent() { waitToComplete(); }
+	Thread *clone() const { return new KeyboardEvent(myBuffer); };
 
-	KeyboardEvent (BoundedBuffer*);  
-	virtual ~KeyboardEvent () {waitToComplete();}
-	Thread* clone() const { return new KeyboardEvent(myBuffer); };
 protected:
-
 	virtual void run();
 
 	char znak;
 
 private:
-  
-	BoundedBuffer* myBuffer;
+	BoundedBuffer *myBuffer;
 };
 
-
-
-
-#endif  // _OS1_KEYBOARD_EVENT_
-
+#endif // _KEYBOARD_EVENT_
