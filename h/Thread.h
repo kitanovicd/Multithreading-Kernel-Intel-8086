@@ -18,7 +18,7 @@ private:
 
 protected:
 	friend class PCB;
-	friend void inic();
+	friend void init();
 	friend int main(int argc, char *argv[]);
 
 	Thread(StackSize stackSize = defaultStackSize, Time timeSlice = defaultTimeSlice);

@@ -11,7 +11,7 @@
 
 void interrupt timer(...);
 void dispatch();
-void inic();
+void init();
 void restore();
 void tick();
 int syncPrintf(const char *format, ...);

@@ -133,26 +133,26 @@ void dispatch()
 	HARD_UNLOCK;
 }
 
-void inic()
+void init()
 {
 	asm {
 		cli
 		push es
 		push ax
 
-		mov ax,0 //  ; inicijalizuje rutinu za tajmer
+		mov ax,0
 		mov es,ax
 
-		mov ax, word ptr es:0022h //; pamti staru rutinu
+		mov ax, word ptr es:0022h
 		mov word ptr oldTimerSEG, ax
 		mov ax, word ptr es:0020h
 		mov word ptr oldTimerOFF, ax
 
-		mov word ptr es:0022h, seg timer // postavlja
-		mov word ptr es:0020h, offset timer // novu rutinu
+		mov word ptr es:0022h, seg timer
+		mov word ptr es:0020h, offset timer
 
-		mov ax, oldTimerSEG //	postavlja staru rutinu
-		mov word ptr es:0182h, ax //; na int 60h
+		mov ax, oldTimerSEG
+		mov word ptr es:0182h, ax
 		mov ax, oldTimerOFF
 		mov word ptr es:0180h, ax
 
