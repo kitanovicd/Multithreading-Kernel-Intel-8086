@@ -3,7 +3,7 @@
 
 #include "Queue.h"
 #include "Semaphor.h"
-#include "Semlist.h"
+#include "SemaphoreList.h"
 #include "Timer.h"
 
 class List;

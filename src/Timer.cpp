@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <dos.h>
 #include <iostream.h>
-#include "KerSem.h"
-#include "Semlist.h"
+#include "KernelSem.h"
+#include "SemaphoreList.h"
 #include "Semaphor.h"
 #include <STDARG.H>
 #include "Event.h"

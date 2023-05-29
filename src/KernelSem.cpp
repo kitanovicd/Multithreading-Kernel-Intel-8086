@@ -1,9 +1,9 @@
-#include "KerSem.h"
+#include "KernelSem.h"
 #include "Semaphor.h"
 #include "Queue.h"
 #include "SCHEDULE.H"
 #include "Timer.h"
-#include "Semlist.h"
+#include "SemaphoreList.h"
 #include "PCB.h"
 #include "Def.h"
 #include <stdio.h>

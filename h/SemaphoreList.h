@@ -3,7 +3,7 @@
 
 #include "Semaphor.h"
 #include "PCB.h"
-#include "KerSem.h"
+#include "KernelSem.h"
 
 class SemaphoreListElement
 {
