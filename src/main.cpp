@@ -1,14 +1,4 @@
-
-#include <iostream.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <dos.h>
-#include "SCHEDULER.H"
-#include "Semaphor.h"
-#include "Timer.h"
-#include "PCB.h"
 #include "Thread.h"
-#include "Def.h"
 
 int userMain(int argv, char *argc[]);
 
