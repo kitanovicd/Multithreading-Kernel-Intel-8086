@@ -10,8 +10,6 @@
 #include "Thread.h"
 #include "Def.h"
 
-const double PI = 3.1415926535;
-
 int userMain(int argv, char *argc[]);
 
 static void interrupt (*oldTimerInterrupt)(...);
