@@ -64,21 +64,19 @@ PCB *Queue::get(ID id)
 		current = preveous->next;
 	}
 
-	if (current != 0)
-	{
-		if (preveous)
-			preveous->next = current->next;
-		else
-			head = current->next;
-
-		if (current->next == 0)
-			tail = preveous;
-
-		PCB *pcb = current->pcb;
-
-		delete current;
-		return pcb;
-	}
-	else
+	if (current == 0)
 		return 0;
+
+	if (preveous)
+		preveous->next = current->next;
+	else
+		head = current->next;
+
+	if (current->next == 0)
+		tail = preveous;
+
+	PCB *pcb = current->pcb;
+
+	delete current;
+	return pcb;
 }

@@ -108,19 +108,17 @@ int KernelSem::wait(Time maxTimeToWait)
             HARD_UNLOCK;
             return 1;
         }
+
+        if (PCB::running->bit == 1)
+        {
+            PCB::running->bit = 0;
+            HARD_UNLOCK;
+            return 1;
+        }
         else
         {
-            if (PCB::running->bit == 1)
-            {
-                PCB::running->bit = 0;
-                HARD_UNLOCK;
-                return 1;
-            }
-            else
-            {
-                HARD_UNLOCK;
-                return 0;
-            }
+            HARD_UNLOCK;
+            return 0;
         }
     }
 
