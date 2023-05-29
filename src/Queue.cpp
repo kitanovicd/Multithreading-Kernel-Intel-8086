@@ -2,7 +2,7 @@
 #include "Def.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "SCHEDULE.H"
+#include "SCHEDULER.H"
 
 Queue::Queue()
 {

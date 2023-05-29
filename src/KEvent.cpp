@@ -4,7 +4,7 @@
 #include "PCB.h"
 #include "Timer.h"
 #include "IVTEntry.h"
-#include "SCHEDULE.H"
+#include "SCHEDULER.H"
 
 KEvent *IVTEntry::events[256];
 routine IVTEntry::routines[256];

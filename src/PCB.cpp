@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "List.h"
-#include "SCHEDULE.H"
+#include "SCHEDULER.H"
 
 int PCB::cnt = 0;
 unsigned PCB::globalBlock = 0;

@@ -1,7 +1,7 @@
 #include "KernelSem.h"
 #include "Semaphor.h"
 #include "Queue.h"
-#include "SCHEDULE.H"
+#include "SCHEDULER.H"
 #include "Timer.h"
 #include "SemaphoreList.h"
 #include "PCB.h"
@@ -40,47 +40,45 @@ int KernelSem::signal(int n)
         HARD_UNLOCK;
         return n;
     }
-    else
+
+    if (n == 0)
     {
-        if (n == 0)
+        if (value + 1 <= 0)
         {
-            if (value + 1 <= 0)
+            PCB *temp = waitQueue->get();
+            list.remove(temp->getID());
+
+            if (temp)
             {
-                PCB *temp = waitQueue->get();
-                list.remove(temp->getID());
-
-                if (temp)
-                {
-                    temp->bit = 1;
-                    temp->status = RUNNABLE;
-                }
-
-                Scheduler::put(temp);
-
-                i++;
-                n--;
-                value++;
+                temp->bit = 1;
+                temp->status = RUNNABLE;
             }
-            else
-            {
-                ++value;
-            }
+
+            Scheduler::put(temp);
+
+            i++;
+            n--;
+            value++;
         }
         else
         {
-            value += n;
+            ++value;
+        }
+    }
+    else
+    {
+        value += n;
 
-            while (n > 0 || waitQueue->size() != 0)
-            {
-                PCB *t = waitQueue->get();
-                list.remove(t->getID());
+        while (n > 0 || waitQueue->size() != 0)
+        {
+            PCB *t = waitQueue->get();
+            list.remove(t->getID());
 
-                t->status = RUNNABLE;
-                i++;
-                n--;
+            t->status = RUNNABLE;
+            i++;
+            n--;
 
-                Scheduler::put(t);
-            }
+            Scheduler::put(t);
         }
     }
 
