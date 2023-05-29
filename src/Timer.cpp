@@ -62,17 +62,18 @@ public:
 		}
 	}
 };
-void interrupt timer(...)
-{ // prekidna rutina
 
+void interrupt timer(...)
+{
 	if (!explicitTimerCall)
 	{
 		asm int 60h;
 		tick();
 		--timeCounter;
 
-		KernelSem::trazi();
+		KernelSem::search();
 	}
+
 	explicitTimerCall = 0;
 
 	if (((timeCounter == 0) && (PCB::running->pcbTimeSlice != 0)) || (contextSwitchOnDemand && PCB::cnt == 0))
@@ -115,9 +116,10 @@ void interrupt timer(...)
 			mov ss,tss
 			mov bp,tbp
 		}
+
 		if (PCB::running != PCB::idle)
 		{
-			PCB::running->izvrsi();
+			PCB::running->execute();
 		}
 	}
 }
@@ -158,6 +160,7 @@ void inic()
 		pop es
 		sti
 	}
+
 	Thread *T = new Thread();
 	PCB::running = new PCB(T);
 	PCB::list.remove(T->myPCB->getID());
@@ -166,6 +169,7 @@ void inic()
 	Idle *i = new Idle();
 	PCB::idle = i->myPCB;
 }
+
 void restore()
 {
 

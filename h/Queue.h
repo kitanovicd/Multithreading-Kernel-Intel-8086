@@ -6,13 +6,13 @@
 
 class PCB;
 
-class Elem
+class QueueElement
 {
 public:
 	PCB *pcb;
-	Elem *next;
+	QueueElement *next;
 
-	Elem(PCB *pcbb)
+	QueueElement(PCB *pcbb)
 	{
 		pcb = pcbb;
 		next = 0;
@@ -23,8 +23,8 @@ class Queue
 {
 private:
 	int len;
-	Elem *first;
-	Elem *last;
+	QueueElement *head;
+	QueueElement *tail;
 
 public:
 	Queue();

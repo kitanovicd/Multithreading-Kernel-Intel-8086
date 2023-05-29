@@ -4,7 +4,7 @@
 //   Date:    Jun 2019
 //   Parametri za pokretanje:
 //        arg[1] - velicina bafera
-//        arg[2] - Broj niti
+//        arg[2] - id niti
 //        arg[3] - TIME_SLICE za proizvodjace
 //===========================================================================//
 

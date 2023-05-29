@@ -33,7 +33,6 @@ int KernelSem::val() const
 int KernelSem::signal(int n)
 {
     HARD_LOCK;
-
     int i = 0;
 
     if (n < 0)
@@ -53,15 +52,12 @@ int KernelSem::signal(int n)
                 if (temp)
                 {
                     temp->bit = 1;
-                }
-
-                if (temp)
                     temp->status = RUNNABLE;
-
-                i++;
+                }
 
                 Scheduler::put(temp);
 
+                i++;
                 n--;
                 value++;
             }
@@ -78,9 +74,11 @@ int KernelSem::signal(int n)
             {
                 PCB *t = waitQueue->get();
                 list.remove(t->getID());
+
                 t->status = RUNNABLE;
                 i++;
                 n--;
+
                 Scheduler::put(t);
             }
         }
@@ -94,16 +92,19 @@ int KernelSem::wait(Time maxTimeToWait)
 {
     HARD_LOCK;
     value--;
+
     if (value < 0)
     {
         PCB::running->status = UNRUNNABLE;
         waitQueue->put(PCB::running);
+
         if (maxTimeToWait > 0)
             list.add(PCB::running, maxTimeToWait, this);
 
         HARD_UNLOCK;
         dispatch();
         HARD_LOCK;
+
         if (maxTimeToWait == 0)
         {
             HARD_UNLOCK;
@@ -124,30 +125,33 @@ int KernelSem::wait(Time maxTimeToWait)
             }
         }
     }
+
     HARD_UNLOCK;
     return 1;
 }
 
-void KernelSem::staviga(PCB *pcbb)
+void KernelSem::put(PCB *pcbb)
 {
     PCB *pcb = waitQueue->get(pcbb->getID());
     ++value;
     pcb->status = RUNNABLE;
     Scheduler::put(pcb);
 }
-void KernelSem::trazi()
+
+void KernelSem::search()
 {
     HARD_LOCK;
-    if ((list.first))
+    if ((list.head))
     {
-        Element *tek;
-        --(list.first->timeToWait);
-        while (list.first && list.first->pcb && list.first->timeToWait == 0)
+        ListElement *current;
+        --(list.head->timeToWait);
+
+        while (list.head && list.head->pcb && list.head->timeToWait == 0)
         {
-            tek = list.first;
-            list.first = list.first->next;
-            tek->sem->staviga(tek->pcb);
-            delete tek;
+            current = list.head;
+            list.head = list.head->next;
+            current->sem->put(current->pcb);
+            delete current;
         }
     }
     HARD_UNLOCK;

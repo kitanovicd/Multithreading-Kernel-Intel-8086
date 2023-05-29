@@ -6,7 +6,7 @@
 #include "Semlist.h"
 #include "Timer.h"
 
-class Lista;
+class List;
 
 class KernelSem
 {
@@ -17,13 +17,13 @@ private:
 public:
 	friend class Semaphore;
 
-	static Lista lista;
+	static List list;
 
 	KernelSem(int init);
+	static void search();
 
-	static void trazi();
 	int val() const;
-	void staviga(PCB *pcb);
+	void put(PCB *pcb);
 
 	virtual ~KernelSem();
 	virtual int wait(Time maxTimeToWait);

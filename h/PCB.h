@@ -9,12 +9,12 @@
 #include "Def.h"
 #include "List.h"
 #include "Thread.h"
-#include "SignList.h"
+#include "SignalList.h"
 #include "Timer.h"
 
 class Thread;
 class Queue;
-class signlist;
+class SignalList;
 
 class PCB
 {
@@ -26,20 +26,20 @@ public:
 	typedef void (*SignalHandler)();
 	typedef unsigned SignalId;
 
-	int status;
 	int bit;
-	int prior[16];
+	int status;
+	int priorities[16];
 
 	unsigned bp;
 	unsigned sp;
 	unsigned ss;
 	unsigned block;
-	unsigned zavrsio;
+	unsigned finished;
 	unsigned *mySP;
 
+	static ID id;
 	static int cnt;
-	static unsigned globallblock;
-	static ID broj;
+	static unsigned globalBlock;
 	static PCB *running;
 	static PCB *idle;
 	static List list;
@@ -51,7 +51,7 @@ public:
 	Thread *myThread;
 	PCB *parent;
 	Queue *myQueue;
-	signlist *niz[16];
+	SignalList *signalLists[16];
 
 	PCB(Thread *T);
 	PCB(Thread *T, StackSize stackSize, Time timeSlice);
@@ -64,15 +64,15 @@ public:
 	static void unblockSignalGlobally(SignalId signal);
 
 	void run();
-	void izvrsi();
-	void swap(SignalId id, SignalHandler hand1, SignalHandler hand2);
+	void execute();
+	void swap(SignalId id, SignalHandler handler1, SignalHandler handler2);
 	void signal(SignalId signal);
 	void blockSignal(SignalId signal);
 	void unblockSignal(SignalId signal);
 	void registerHandler(SignalId signal, SignalHandler handler);
-	void unregisterAllHandlers(SignalId id);
+	void unregisterAllHandlers(SignalId signal);
 
-	SignalHandler unisti();
+	SignalHandler destroy();
 };
 
 #endif

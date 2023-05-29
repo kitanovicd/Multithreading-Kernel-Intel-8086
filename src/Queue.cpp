@@ -3,67 +3,82 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SCHEDULE.H"
-Queue::Queue() {
 
-    this->first=0;
-    this->last=0;
-    len=0;
+Queue::Queue()
+{
 
+	this->head = 0;
+	this->tail = 0;
+	len = 0;
 }
-Queue::~Queue() {
-	while(!(this->first==0)){
-		Elem* stari = this->first;
-		this->first=this->first->next;
-	    delete stari;
-	    len--;
+
+Queue::~Queue()
+{
+	while (!(this->head == 0))
+	{
+		QueueElement *old = this->head;
+		this->head = this->head->next;
+
+		delete old;
+		len--;
 	}
 }
-void Queue::put(PCB* pcb){
 
-    if (first==0){
-    	first=last=new Elem(pcb);
-    }
-    else{
-    	last=last->next=new Elem(pcb);
-    }
-    len++;
+void Queue::put(PCB *pcb)
+{
+	if (head == 0)
+		head = tail = new QueueElement(pcb);
+	else
+		tail = tail->next = new QueueElement(pcb);
+
+	len++;
 }
-int Queue::size() const{
+
+int Queue::size() const
+{
 	return len;
 }
-PCB* Queue::get(){
 
-	if (this->first == 0){ return 0; }
-	Elem* temp=this->first;
-	this->first=this->first->next;
+PCB *Queue::get()
+{
+
+	if (this->head == 0)
+		return 0;
+
+	QueueElement *temp = this->head;
+	this->head = this->head->next;
 	len--;
-	PCB* pcb=temp->pcb;
+
+	PCB *pcb = temp->pcb;
 	delete temp;
 	return pcb;
 }
-PCB* Queue::get(ID id){
-	Elem* cur=first;
-	Elem* prev=0;
-	while(cur!=0 && cur->pcb->getID()!=id){
-		prev=cur;
-		cur=cur->next;
 
+PCB *Queue::get(ID id)
+{
+	QueueElement *current = head;
+	QueueElement *preveous = 0;
+	while (current != 0 && current->pcb->getID() != id)
+	{
+		preveous = current;
+		current = preveous->next;
 	}
-	if (cur != 0) {
-		if (prev){
-			prev->next=cur->next;
-		}
-		else{
-			first=cur->next;
 
-		}
-		if (cur->next==0){
-			last=prev;
-		}
-		PCB* pcb=cur->pcb;//Ovo je menjano stojalo je return cur->pcb;
+	if (current != 0)
+	{
+		if (preveous)
+			preveous->next = current->next;
+		else
+			head = current->next;
 
-		delete cur;
+		if (current->next == 0)
+			tail = preveous;
+
+		PCB *pcb = current->pcb;
+
+		delete current;
 		return pcb;
 	}
-	else return 0;
+	else
+		return 0;
 }

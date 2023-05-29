@@ -5,15 +5,15 @@
 #include "PCB.h"
 #include "KerSem.h"
 
-class Element
+class SemaphoreListElement
 {
 public:
 	Time timeToWait;
 	PCB *pcb;
-	Element *next;
+	SemaphoreListElement *next;
 	KernelSem *sem;
 
-	Element(PCB *t, Time t1, KernelSem *semm)
+	SemaphoreListElement(PCB *t, Time t1, KernelSem *semm)
 	{
 		pcb = t;
 		next = 0;
@@ -22,17 +22,17 @@ public:
 	}
 };
 
-class List
+class SemaphoreList
 {
 private:
-	Element *first;
-	Element *last;
+	SemaphoreListElement *head;
+	SemaphoreListElement *tail;
 
 public:
 	friend class KernelSem;
 
-	List();
-	virtual ~List();
+	SemaphoreList();
+	virtual ~SemaphoreList();
 
 	void remove(ID id);
 	void add(PCB *t, Time t1, KernelSem *semm);

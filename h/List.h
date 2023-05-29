@@ -7,13 +7,13 @@
 
 class PCB;
 
-class El
+class ListElement
 {
 public:
 	PCB *pcb;
-	El *next;
+	ListElement *next;
 
-	El(PCB *t)
+	ListElement(PCB *t)
 	{
 		pcb = t;
 		next = 0;
@@ -23,8 +23,8 @@ public:
 class List
 {
 public:
-	El *first;
-	El *last;
+	ListElement *head;
+	ListElement *tail;
 
 	List();
 	virtual ~List();

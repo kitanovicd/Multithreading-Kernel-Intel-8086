@@ -37,7 +37,7 @@ public:
 	static void blockSignalGlobally(SignalId signal);
 	static void unblockSignalGlobally(SignalId signal);
 
-	void swap(SignalId id, SignalHandler hand1, SignalHandler hand2);
+	void swap(SignalId id, SignalHandler handler1, SignalHandler handler2);
 	void signal(SignalId signal);
 	void blockSignal(SignalId signal);
 	void unblockSignal(SignalId signal);
