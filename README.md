@@ -7,13 +7,11 @@ The kernel is implemented in such a way that the user program (application) and 
 
 # Detailes
 
-The kernel and the user application are treated as a single program (.exe) obtained by compiling and linking the code written in the programming language in which they are implemented. They should be executed within the Windows operating system on a PC computer as a unified console application (.exe), or process. The Windows operating system will be referred to as the host system.
+The kernel and the user application are treated as a single program (.exe) obtained by compiling and linking the code written in C++ programming language. They should be executed within the Windows operating system on a PC computer as a unified console application (.exe), or process. The Windows operating system will be referred to as the host system.
 
 Both the kernel and the user application must terminate properly as console applications, provided there are no irregularities within the user application itself. This means that after all threads launched within the user application have finished, the entire program will terminate normally. The test cases are regular, so any irregular termination of the program indicates an irregularity in the kernel itself.
 
 In the implementation of the kernel, host system services related to thread or process concepts, semaphores, interrupts, synchronization, or communication between threads or processes are not used. In other words, all the required concepts and functionalities are implemented completely independently and "from scratch".
-
-In the implementation of the kernel, only standard (statically linked) C/C++ libraries that are fully portable and platform-independent (hardware and operating system) are used. The kernel and the user application, as a single program, are executable on practically any PC computer. The program is completely self-contained and independent of any other software component. It should be executed simply by running the .exe file from any medium.
 
 # Relationship between the Kernel and the User Application
 
@@ -60,7 +58,4 @@ The provided text describes switching and thread synchronization mechanisms in a
 
 &nbsp; **Event class**:
    - Implemented the `Event` class, defined in `event.h`, which encapsulates the event concept. It includes methods such as `wait()` and `signal()`, as well as a friend relationship with the `KernelEv` class.
-
-&nbsp; **KernelEv**:
-   - Implemented the `KernelEv` class as the kernel-level implementation of events.
 
