@@ -11,11 +11,11 @@
 #include <stdlib.h>
 #include <dos.h>
 
-Lista::Lista() {
+List::List() {
 	first=last=0;
 }
 
-Lista::~Lista() {
+List::~List() {
 
 	while(first){
 		Element* stari=first;
@@ -24,7 +24,7 @@ Lista::~Lista() {
 	}
 
 }
-void Lista::add(PCB* t,Time t1,KernelSem* semm){
+void List::add(PCB* t,Time t1,KernelSem* semm){
 
 
     Element* cur=first;
@@ -51,7 +51,7 @@ void Lista::add(PCB* t,Time t1,KernelSem* semm){
 
 }
 
-PCB* Lista::find(ID id){
+PCB* List::find(ID id){
 	//HARD_LOCK;
 	Element* cur=first;
 	while(cur && cur->pcb->getID() != id){
@@ -64,7 +64,7 @@ PCB* Lista::find(ID id){
 	//HARD_UNLOCK;
 	return 0;
 }
-void Lista::remove(ID id){
+void List::remove(ID id){
 
 	Element* cur=first;
 	Element* prev=0;

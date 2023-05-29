@@ -2,17 +2,22 @@
 #define SEMAPHORE_H_
 
 typedef unsigned int Time;
+
 class KernelSem;
-class Semaphore {
+
+class Semaphore
+{
+private:
+	KernelSem *myImpl;
+
 public:
-	Semaphore(int init=1);
+	Semaphore(int init = 1);
 	virtual ~Semaphore();
 
-	virtual int wait(Time maxTimeToWait);
-	virtual int signal(int n=0);
 	int val() const;
-private:
-	KernelSem* myImpl;
+
+	virtual int wait(Time maxTimeToWait);
+	virtual int signal(int n = 0);
 };
 
 #endif

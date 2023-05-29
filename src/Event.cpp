@@ -3,18 +3,22 @@
 #include "PCB.h"
 #include "KEvent.h"
 
-Event::Event(IVTNo ivtNo) {
-    myImpl=new KEvent(PCB::running,ivtNo);
+Event::Event(IVTNo ivtNo)
+{
+	myImpl = new KEvent(PCB::running, ivtNo);
 }
 
-Event::~Event() {
+Event::~Event()
+{
 	delete myImpl;
 }
 
-void Event::wait(){
+void Event::wait()
+{
 	myImpl->wait();
 }
 
-void Event::signal(){
+void Event::signal()
+{
 	myImpl->signal();
 }

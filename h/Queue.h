@@ -3,31 +3,38 @@
 
 #include "PCB.h"
 #include "Def.h"
+
 class PCB;
 
-class Elem{
+class Elem
+{
 public:
-    PCB* pcb;
-    Elem* next;
-    Elem(PCB* pcbb){
-    	pcb=pcbb;
-    	next=0;
-    }
+	PCB *pcb;
+	Elem *next;
+
+	Elem(PCB *pcbb)
+	{
+		pcb = pcbb;
+		next = 0;
+	}
 };
 
+class Queue
+{
+private:
+	int len;
+	Elem *first;
+	Elem *last;
 
-class Queue {
 public:
 	Queue();
 	virtual ~Queue();
 
-	void put(PCB* pcb);
-	PCB* get();
 	int size() const;
-	PCB* get(ID id);
-private:
-	int len;
-	Elem* first;
-	Elem* last;
+	void put(PCB *pcb);
+
+	PCB *get();
+	PCB *get(ID id);
 };
+
 #endif

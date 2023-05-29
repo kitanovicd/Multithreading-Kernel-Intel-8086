@@ -5,10 +5,11 @@
 // Dodati APLICAT.LIB u projekat: (Project->Add Item...), promeniti Name filter u *.* kako bi se videli svi fajlovi i odabrati APLICAT.LIB. Zatim pozvati Compile->Build All
 class PCB;
 
-class Scheduler{
+class Scheduler
+{
 public:
-	static void put (PCB *);
-	static PCB* get ();
+	static void put(PCB *);
+	static PCB *get();
 };
 
 #endif

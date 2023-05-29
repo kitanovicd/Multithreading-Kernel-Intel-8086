@@ -15,5 +15,5 @@ void inic();
 void restore();
 void tick();
 int syncPrintf(const char *format, ...);
-#endif /* TIMER_H_ */
 
+#endif /* TIMER_H_ */
